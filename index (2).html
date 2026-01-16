@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="my">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MLBB Dia Shop - Han Min Htet</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background-color: #0f172a;
+        color: white;
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+      }
+      .shop-card {
+        background: #1e293b;
+        padding: 25px;
+        border-radius: 24px;
+        width: 100%;
+        max-width: 380px;
+        text-align: center;
+        border: 1px solid #334155;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      }
+      .item-img {
+        width: 50px;
+        height: auto;
+        margin-bottom: 15px;
+      }
+      .welcome-msg {
+        font-size: 14px;
+        color: #e2e8f0;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        padding: 15px;
+        background: rgba(56, 189, 248, 0.1);
+        border-radius: 12px;
+        border-left: 4px solid #38bdf8;
+        text-align: left;
+      }
+      .payment-box {
+        background: #0f172a;
+        padding: 15px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        border: 1px dashed #475569;
+        text-align: left;
+      }
+      .kpay-name {
+        font-weight: bold;
+        color: #38bdf8;
+        font-size: 16px;
+      }
+      .kpay-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 5px;
+      }
+      .copy-btn {
+        background: #38bdf8;
+        color: #0f172a;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 14px;
+        margin: 8px 0;
+        border-radius: 10px;
+        border: 1px solid #475569;
+        background: #1e293b;
+        color: white;
+        box-sizing: border-box;
+        font-size: 15px;
+        -webkit-appearance: none;
+      }
+      .btn-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .btn {
+        padding: 14px;
+        border-radius: 10px;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 16px;
+        display: block;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+      }
+      .fb-btn {
+        background: #1877f2;
+      }
+      .tg-btn {
+        background: #0088cc;
+      }
+      .phone-btn {
+        background: #22c55e;
+      }
+
+      /* Copy အလုပ်လုပ်ဖို့ ဖုန်းနံပါတ်ကို ခဏဖျောက်ထားမဲ့ input */
+      #temp-input {
+        position: absolute;
+        left: -9999px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shop-card">
+      <img
+        src="https://images.seeklogo.com/logo-png/59/1/mobile-legends-new-logo-png_seeklogo-599669.png"
+        class="item-img"
+        alt="MLBB Logo"
+      />
+
+      <div class="welcome-msg">
+        Mobile legends Dia များကိုကျနော်ဆီမာဝယ်ယူလို့ရပါတယ်<br />
+        Game ID နဲ့ Zone id လေးဖြည့်ပြီး
+        အောက်ကပို့ချင်တာနဲ့နှိပ်ပီးပို့လိုက်ရင်ရပါတယ်ဗျ
+      </div>
+
+      <div class="payment-box">
+        <span style="font-size: 12px; color: #94a3b8">Kpay လွှဲရန်</span>
+        <div class="kpay-name">Name: Han Min Htet</div>
+        <div class="kpay-row">
+          <span style="font-weight: bold; font-size: 18px">09977123184</span>
+          <button class="copy-btn" onclick="copyNumber()">Copy</button>
+        </div>
+      </div>
+
+      <input type="text" id="temp-input" value="09977123184" />
+
+      <input type="number" id="userid" placeholder="User ID" />
+      <input type="number" id="zoneid" placeholder="Zone ID" />
+
+      <select id="item">
+        <option value="Weekly Diamond Pass - 6,500 Ks">
+          Weekly Diamond Pass - 6,500 Ks
+        </option>
+        <option value="11 Diamonds - 1,000 Ks">11 Diamonds - 1,000 Ks</option>
+      </select>
+
+      <div class="btn-group">
+        <button onclick="sendTo('fb')" class="btn fb-btn">
+          Messenger ကနေ ဝယ်ယူမယ်
+        </button>
+        <button onclick="sendTo('tg')" class="btn tg-btn">
+          Telegram ကနေ ဝယ်ယူမယ်
+        </button>
+        <a href="tel:09977123184" class="btn phone-btn"
+          >📞 ဖုန်းဆက်သွယ်ဝယ်ယူရန်</a
+        >
+      </div>
+    </div>
+
+    <script>
+      // Copy အလုပ်လုပ်အောင် နည်းလမ်းဟောင်း (execCommand) ကို သုံးထားပါတယ် (ဒါက Portal မှာ ပိုစိတ်ချရပါတယ်)
+      function copyNumber() {
+        const copyText = document.getElementById("temp-input");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); // Mobile အတွက်
+        document.execCommand("copy");
+        alert("Kpay ဖုန်းနံပါတ်ကို Copy ကူးလိုက်ပါပြီ: " + copyText.value);
+      }
+
+      function sendTo(platform) {
+        const userId = document.getElementById("userid").value;
+        const zoneId = document.getElementById("zoneid").value;
+        const item = document.getElementById("item").value;
+
+        if (!userId || !zoneId) {
+          alert("ကျေးဇူးပြု၍ ID ဖြည့်ပေးပါဦး");
+          return;
+        }
+
+        const message = `MLBB ဝယ်ယူလိုပါသည်%0AItem: ${item}%0AUser ID: ${userId}%0AZone ID: ${zoneId}`;
+
+        let url = "";
+        if (platform === "tg") {
+          url = `https://t.me/Srflip55?text=${message}`;
+        } else if (platform === "fb") {
+          url = `https://m.me/han.min.htet.55?text=${message}`;
+        }
+
+        // Portal မှာ window.open အလုပ်မလုပ်ရင် window.location နဲ့ အတင်းခေါ်ခိုင်းတာပါ
+        window.location.href = url;
+      }
+    </script>
+  </body>
+</html>
